@@ -1,7 +1,23 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import tw from "tailwind-styled-components";
+import {useRouter} from 'next/router'
+import {signInWithPopup, onAuthStateChanged} from 'firebase/auth'
+import {Auth,provider} from '../firebase'
 
 const Login = () => {
+
+    const router = useRouter()
+
+    useEffect(() => {
+        onAuthStateChanged(Auth, user =>{
+            if(user){
+                router.push('/')
+            }
+        })
+        
+        
+    }, [])
+
     return (
         <Wrapper>
             <Logo src="https://i.ibb.co/n6LWQM4/Post.png" />
@@ -9,7 +25,7 @@ const Login = () => {
             Log in to access your account 
             </Title>
             <HeadImage src="https://i.ibb.co/CsV9RYZ/login-image.png"/>
-            <SignInButton>
+            <SignInButton onClick={()=> signInWithPopup(Auth,provider)}>
                 Sign in with google
             </SignInButton>    
 
