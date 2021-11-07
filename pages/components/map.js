@@ -6,7 +6,8 @@ import { useEffect } from "react";
 mapboxgl.accessToken =
   "pk.eyJ1IjoibXVzdGFwaGFnaGFubm91Y2hpIiwiYSI6ImNrdm1kbHZ1ZjllamMzMHM3NzM3czMweGQifQ.FL52UMDqPsTARFYEk4SA9w";
 
-const map = () => {
+const map = (props) => {
+  
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: "map",
@@ -14,12 +15,36 @@ const map = () => {
       center: [9.537499, 33.886917],
       zoom: 5.2,
     });
-  });
-  return <Wrapper id="map"></Wrapper>;
+
+    if(props.pickupCoordinates){
+      addToMap(map,props.pickupCoordinates)
+    }
+    if(props.dropoffCoordinates){
+      addToMap(map,props.dropoffCoordinates)
+    }
+    if(props.pickupCoordinates && props.dropoffCoordinates){
+      map.fitBounds([
+        props.dropoffCoordinates,
+        props.pickupCoordinates
+      ], {
+        padding : 60
+      })
+    }
+  },[props.pickupCoordinates , props.dropoffCoordinates]);
+
+  const addToMap = (map,coordinates) => {
+    const marker1 = new mapboxgl.Marker()
+      .setLngLat(coordinates)
+      .addTo(map);
+  };
+
+  return <Wrapper id="map">
+          
+  </Wrapper>;
 };
 
 export default map;
 
 const Wrapper = tw.div`
-flex-1
-`
+flex-1 h-1/2
+`;

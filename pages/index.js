@@ -11,7 +11,7 @@ export default function Home() {
       <Map />
       <ActionItems>
         <Header>
-          <Logo src="https://i.ibb.co/MhFnTbN/TMWY.png" />
+          <Logo src="https://i.ibb.co/84stgjq/uber-technologies-new-20218114.jpg" />
           <Profile>
             <Name>Mustapha Ghannouchi</Name>
             <UserImage src="https://i.ibb.co/88Qhm4b/134366433-10222227735553843-6602077586545660065-n.jpg" />
